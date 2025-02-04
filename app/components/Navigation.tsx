@@ -9,7 +9,7 @@ export default function Navigation() {
           <div className="flex items-center space-x-8">
             <div className="flex-shrink-0">
               <Link href="/">
-                <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
+                <img src="/Logo.png" alt="Logo" className="h-14 w-14" />
               </Link>
             </div>
             

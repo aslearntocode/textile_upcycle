@@ -19,7 +19,7 @@ export default function Impact() {
 
           {/* Suppliers Stat */}
           <div className="bg-orange-400 rounded-lg p-8 text-center min-w-[200px]">
-            <div className="text-5xl font-bold text-white mb-2">100000+</div>
+            <div className="text-5xl font-bold text-white mb-2">100,000+</div>
             <div className="text-white">Plants Saved from Deforestation by 2026</div>
           </div>
 
@@ -40,7 +40,7 @@ export default function Impact() {
 
           {/* Zip Codes Stat */}
           <div className="bg-green-400 rounded-lg p-8 text-center min-w-[200px]">
-            <div className="text-5xl font-bold text-white mb-2">100000+</div>
+            <div className="text-5xl font-bold text-white mb-2">100,000+</div>
             <div className="text-white">Kgs of Textile Waste Saved from Landfill by 2026</div>
           </div>
 

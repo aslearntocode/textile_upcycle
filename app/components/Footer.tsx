@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="bg-green-600 text-white py-16">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* About Section */}
           <div>
@@ -52,9 +52,9 @@ export default function Footer() {
             <ul className="space-y-4">
               <li><a href="/about" className="hover:text-yellow-400">About Us</a></li>
               <li><a href="/offerings" className="hover:text-yellow-400">Our Offerings</a></li>
-              <li><a href="/supply-chain" className="hover:text-yellow-400">Supply Chain</a></li>
-              <li><a href="/technology" className="hover:text-yellow-400">Technology</a></li>
-              <li><a href="/awards" className="hover:text-yellow-400">Awards</a></li>
+              {/* <li><a href="/supply-chain" className="hover:text-yellow-400">Supply Chain</a></li> */}
+              {/* <li><a href="/technology" className="hover:text-yellow-400">Technology</a></li>
+              <li><a href="/awards" className="hover:text-yellow-400">Awards</a></li> */}
               <li><a href="/careers" className="hover:text-yellow-400">Careers</a></li>
               <li><a href="/resources" className="hover:text-yellow-400">Resources</a></li>
               <li><a href="/contact" className="hover:text-yellow-400">Contact Us</a></li>
@@ -65,10 +65,10 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-6">OUR OFFERINGS</h3>
             <ul className="space-y-4">
-              <li><a href="/products/recycled-textiles" className="hover:text-yellow-400">Recycled Textiles</a></li>
-              <li><a href="/products/sustainable-fabrics" className="hover:text-yellow-400">Sustainable Fabrics</a></li>
-              <li><a href="/services/advisory" className="hover:text-yellow-400">Advisory Services</a></li>
-              <li><a href="/services/assessment" className="hover:text-yellow-400">Recyclability Assessment</a></li>
+              <li><a href="/products/recycled-textiles" className="hover:text-yellow-400">Recycled Products</a></li>
+              <li><a href="/products/sustainable-fabrics" className="hover:text-yellow-400">Technology</a></li>
+              {/* <li><a href="/services/advisory" className="hover:text-yellow-400">Advisory Services</a></li>
+              <li><a href="/services/assessment" className="hover:text-yellow-400">Recyclability Assessment</a></li> */}
             </ul>
           </div>
 

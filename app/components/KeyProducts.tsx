@@ -9,31 +9,31 @@ export default function KeyProducts() {
     {
       id: 2,
       name: "Recycled Planks",
-      image: "/products/denim.jpg",
+      image: "/comingsoon.png",
       description: "Premium recycled denim for eco-conscious manufacturing"
     },
     {
       id: 3,
       name: "Recycled Trays",
-      image: "/products/cotton-blend.jpg",
+      image: "/comingsoon.png",
       description: "Sustainable cotton blend perfect for casual wear"
     },
     {
       id: 4,
       name: "Recycled Kids Furniture",
-      image: "/products/yarn.jpg",
+      image: "/comingsoon.png",
       description: "Recycled yarn for sustainable textile production"
     },
     {
       id: 5,
       name: "Recycled Photo Frames",
-      image: "/products/wool.jpg",
+      image: "/comingsoon.png",
       description: "Recycled wool blend for premium clothing"
     },
     {
       id: 6,
       name: "Recycled Pots",
-      image: "/products/nylon.jpg",
+      image: "/comingsoon.png",
       description: "Durable recycled nylon for sportswear"
     },
     // {
