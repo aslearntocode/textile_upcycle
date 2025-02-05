@@ -2,10 +2,17 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
-const products = [
+interface Product {
+  title: string
+  description: string
+  image: string
+  price: number
+}
+
+const products: Product[] = [
   {
     title: "Upcycled Coaster",
-    description: "High-quality textile upcycled into coasters",
+    description: "High-quality textile upcycled into beautiful coasters",
     image: "/Coasters.jpeg",
     price: 1499
   },
@@ -23,7 +30,7 @@ const products = [
   },
   {
     title: "Upcycled Coaster",
-    description: "High-quality textile upcycled into coasters",
+    description: "High-quality textile upcycled into beautiful coasters",
     image: "/Coasters.jpeg",
     price: 1499
   },
@@ -42,9 +49,9 @@ const products = [
 ]
 
 export default function KeyProducts() {
-  const [quantities, setQuantities] = useState({})
+  const [quantities, setQuantities] = useState<Record<string, number>>({})
 
-  const formatPrice = (price: number) => {
+  const formatPrice = (price: number): string => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
@@ -52,14 +59,14 @@ export default function KeyProducts() {
     }).format(price)
   }
 
-  const handleAddToCart = (title) => {
+  const handleAddToCart = (title: string): void => {
     setQuantities(prev => ({
       ...prev,
       [title]: (prev[title] || 0) + 1
     }))
   }
 
-  const updateQuantity = (title, delta) => {
+  const updateQuantity = (title: string, delta: number): void => {
     setQuantities(prev => {
       const newQuantity = Math.max(0, (prev[title] || 0) + delta)
       return {
