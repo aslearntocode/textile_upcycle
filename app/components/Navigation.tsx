@@ -1,10 +1,67 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import Login from './Login'
+import { auth } from '@/app/firebase/config'
+import { signOut } from 'firebase/auth'
+import { useRouter } from 'next/navigation'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const [user, setUser] = useState(null)
+  const [showDropdown, setShowDropdown] = useState(false)
+  const router = useRouter()
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user)
+    })
+    return () => unsubscribe()
+  }, [])
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth)
+      router.push('/')
+    } catch (error) {
+      console.error('Sign out error:', error)
+    }
+  }
+
+  const UserMenu = () => (
+    <div className="relative">
+      <button
+        onClick={() => setShowDropdown(!showDropdown)}
+        className="flex items-center gap-2 bg-green-700 px-4 py-2 rounded hover:bg-green-600"
+      >
+        <span>{user?.email?.split('@')[0]}</span>
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={showDropdown ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
+        </svg>
+      </button>
+
+      {showDropdown && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-50">
+          <div className="py-1">
+            <Link href="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+              Edit Profile
+            </Link>
+            <Link href="/cart" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+              Cart
+            </Link>
+            <button
+              onClick={handleSignOut}
+              className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
 
   return (
     <nav className="bg-green-800 text-white">
@@ -33,9 +90,46 @@ export default function Navigation() {
             </svg>
           </button>
         </div>
-        <button className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500">
-          Log In
-        </button>
+        {user ? (
+          <UserMenu />
+        ) : (
+          <button 
+            onClick={() => setShowLogin(true)}
+            className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500"
+          >
+            Log In
+          </button>
+        )}
+      </div>
+
+      {/* Desktop view */}
+      <div className="hidden lg:flex justify-between items-center p-4">
+        <div className="flex items-center gap-8">
+          <Image 
+            src="/logo.png" 
+            alt="Logo" 
+            width={32} 
+            height={32}
+            className="h-8 w-auto"
+          />
+          <Link href="/" className="hover:text-yellow-400">Home</Link>
+          <Link href="/about" className="hover:text-yellow-400">About</Link>
+          <Link href="/b2b" className="hover:text-yellow-400">B2B</Link>
+          <Link href="/b2c" className="hover:text-yellow-400">B2C</Link>
+          <Link href="/contact" className="hover:text-yellow-400">Contact</Link>
+          <Link href="/resources" className="hover:text-yellow-400">Resources</Link>
+          <Link href="/careers" className="hover:text-yellow-400">Careers</Link>
+        </div>
+        {user ? (
+          <UserMenu />
+        ) : (
+          <button 
+            onClick={() => setShowLogin(true)}
+            className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500"
+          >
+            Log In
+          </button>
+        )}
       </div>
 
       {/* Mobile menu */}
@@ -51,50 +145,8 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Desktop menu - unchanged */}
-      <div className="hidden lg:block">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center h-16">
-            {/* Logo and Navigation Links - Left Side */}
-            <div className="flex items-center space-x-8">
-              <div className="flex-shrink-0">
-                <Link href="/">
-                  <img src="/Logo.png" alt="Logo" className="h-14 w-14" />
-                </Link>
-              </div>
-              
-              {/* Navigation Links */}
-              <div className="flex space-x-6">
-                <Link href="/" className="text-white hover:text-yellow-400 px-3 py-2">
-                  Home
-                </Link>
-                <Link href="/about" className="text-white hover:text-yellow-400 px-3 py-2">
-                  About Us
-                </Link>
-                <Link href="/b2b" className="text-white hover:text-yellow-400 px-3 py-2">
-                  B2B Products
-                </Link>
-                <Link href="/b2c" className="text-white hover:text-yellow-400 px-3 py-2">
-                  B2C Products
-                </Link>
-                <Link href="/technology" className="text-white hover:text-yellow-400 px-3 py-2">
-                  Technology
-                </Link>
-                <Link href="/awards" className="text-white hover:text-yellow-400 px-3 py-2">
-                  Awards
-                </Link>
-              </div>
-            </div>
-
-            {/* Login Button - Right Side */}
-            <div className="ml-auto">
-              <button className="bg-yellow-400 text-black px-6 py-2 rounded-md hover:bg-yellow-500">
-                Log In
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Login Modal */}
+      {showLogin && <Login onClose={() => setShowLogin(false)} />}
     </nav>
   )
 } 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from './components/Navigation'
 import Announcement from './components/Announcement'
@@ -5,6 +6,11 @@ import Footer from './components/Footer'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: "Textile Upcycle",
+  description: "Sustainable textile recycling solutions",
+};
 
 export default function RootLayout({
   children,
