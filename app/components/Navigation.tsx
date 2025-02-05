@@ -4,13 +4,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Login from './Login'
 import { auth } from '@/app/firebase/config'
-import { signOut } from 'firebase/auth'
+import { signOut, User } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
   const router = useRouter()
 
